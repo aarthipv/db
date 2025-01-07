@@ -1,0 +1,55 @@
+CREATE TABLE SAILORS (
+    Sid INT PRIMARY KEY,
+    Sname VARCHAR(50),
+    Rating INT,
+    Age FLOAT
+);
+
+CREATE TABLE BOATS (
+    Bid INT PRIMARY KEY,
+    Bname VARCHAR(50),
+    Colour VARCHAR(20)
+);
+
+CREATE TABLE RESERVES (
+    Sid INT,
+    Bid INT,
+    Day DATE,
+    PRIMARY KEY (Sid, Bid, Day),
+    FOREIGN KEY (Sid) REFERENCES SAILORS(Sid),
+    FOREIGN KEY (Bid) REFERENCES BOATS(Bid)
+);
+
+INSERT INTO SAILORS VALUES 
+(1, 'John', 5, 25.5),
+(2, 'Anna', 8, 22.3),
+(3, 'Mike', 7, 30.1),
+(4, 'Sara', 6, 28.4),
+(5, 'Tom', 9, 26.7);
+
+INSERT INTO BOATS VALUES 
+(101, 'Sunrise', 'Red'),
+(102, 'Wave Rider', 'Blue'),
+(103, 'Ocean Dream', 'Green'),
+(104, 'Sea Breeze', 'Yellow'),
+(105, 'Wind Chaser', 'Red');
+
+INSERT INTO RESERVES VALUES 
+(1, 101, '2025-01-01'),
+(2, 103, '2025-01-02'),
+(3, 105, '2025-01-03'),
+(4, 101, '2025-01-04'),
+(5, 102, '2025-01-05');
+
+SELECT DISTINCT S.Sname
+FROM SAILORS S
+JOIN RESERVES R ON S.Sid = R.Sid;
+
+SELECT DISTINCT R.Sid
+FROM RESERVES R
+JOIN BOATS B ON R.Bid = B.Bid
+WHERE B.Colour IN ('Red', 'Green');
+
+SELECT S.Sid
+FROM SAILORS S
+WHERE S.Sid NOT IN (SELECT R.Sid FROM RESERVES R);
