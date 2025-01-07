@@ -1,0 +1,105 @@
+// Create collection and insert documents
+db.restaurants.insertMany([
+    {
+        name: "Tandoor Express",
+        address: { building: "14", street: "MG Road", area: "Indiranagar", pin_code: "560038" },
+        id: "RE001",
+        cuisine: "North Indian Thali",
+        nearby_landmarks: ["KFC", "Indiranagar Metro"],
+        online_delivery: "yes",
+        famous_for: "Butter Chicken"
+    },
+    {
+        name: "Royal India",
+        address: { building: "12", street: "Church Street", area: "MG Road", pin_code: "560001" },
+        id: "RE002",
+        cuisine: "North Indian Thali",
+        nearby_landmarks: ["Bangalore Palace", "Vidhana Soudha"],
+        online_delivery: "no",
+        famous_for: "Paneer Tikka"
+    },
+    {
+        name: "Spice Junction",
+        address: { building: "101", street: "Kormangala", area: "Koramangala", pin_code: "560034" },
+        id: "RE003",
+        cuisine: "South Indian",
+        nearby_landmarks: ["Forum Mall", "Koramangala Club"],
+        online_delivery: "yes",
+        famous_for: "Dosa"
+    },
+    {
+        name: "Indus Flavours",
+        address: { building: "203", street: "Bangalore West", area: "Jayanagar", pin_code: "560041" },
+        id: "RE004",
+        cuisine: "North Indian Thali",
+        nearby_landmarks: ["Jayanagar Shopping Complex", "Jayanagar Metro"],
+        online_delivery: "no",
+        famous_for: "Dal Makhani"
+    },
+    {
+        name: "Biryani Point",
+        address: { building: "44", street: "Vasanth Nagar", area: "Vasanth Nagar", pin_code: "560052" },
+        id: "RE005",
+        cuisine: "Biryani",
+        nearby_landmarks: ["Bangalore Golf Course", "Cubbon Park"],
+        online_delivery: "yes",
+        famous_for: "Hyderabadi Biryani"
+    },
+    {
+        name: "Punjab Tandoori",
+        address: { building: "20", street: "Whitefield", area: "ITPL", pin_code: "560066" },
+        id: "RE006",
+        cuisine: "North Indian Thali",
+        nearby_landmarks: ["Phoenix Market City", "Sri Sathya Sai Hospital"],
+        online_delivery: "yes",
+        famous_for: "Tandoori Roti"
+    },
+    {
+        name: "Zaika Dastarkhwan",
+        address: { building: "15", street: "Basavanagudi", area: "Basavanagudi", pin_code: "560004" },
+        id: "RE007",
+        cuisine: "North Indian Thali",
+        nearby_landmarks: ["Basavanagudi Temple", "Bugle Rock Park"],
+        online_delivery: "no",
+        famous_for: "Kebabs"
+    },
+    {
+        name: "The Royal Feast",
+        address: { building: "12", street: "Richmond Road", area: "Bangalore Central", pin_code: "560025" },
+        id: "RE008",
+        cuisine: "North Indian Thali",
+        nearby_landmarks: ["Cubbon Park", "MG Road"],
+        online_delivery: "yes",
+        famous_for: "Shahi Paneer"
+    },
+    {
+        name: "Kashmir Kitchen",
+        address: { building: "75", street: "Ulsoor", area: "Ulsoor", pin_code: "560042" },
+        id: "RE009",
+        cuisine: "North Indian Thali",
+        nearby_landmarks: ["Ulsoor Lake", "MG Road"],
+        online_delivery: "no",
+        famous_for: "Rogan Josh"
+    },
+    {
+        name: "Saffron Spice",
+        address: { building: "50", street: "Koramangala", area: "Koramangala", pin_code: "560095" },
+        id: "RE010",
+        cuisine: "North Indian Thali",
+        nearby_landmarks: ["Koramangala Forum Mall", "St. John's Hospital"],
+        online_delivery: "yes",
+        famous_for: "Aloo Paratha"
+    }
+]);
+
+// Query 1: List the name, address and nearby landmarks of all restaurants in Bangalore where north Indian thali is available
+db.restaurants.find(
+    { cuisine: "North Indian Thali" },
+    { name: 1, address: 1, nearby_landmarks: 1, _id: 0 }
+);
+
+// Query 2: List the name and address of restaurants and also the dish the restaurant is famous for, in Bangalore
+db.restaurants.find(
+    { address: { $regex: "Bangalore", $options: "i" } },
+    { name: 1, address: 1, famous_for: 1, _id: 0 }
+);
