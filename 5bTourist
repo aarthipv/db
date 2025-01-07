@@ -1,0 +1,19 @@
+db.TouristPlaces.insertMany([
+    { "Place": "Munnar", "Address": { "State": "Kerala", "ID": 1 }, "TouristAttractions": ["Tea Gardens", "Eravikulam National Park"], "BestTime": "October to May", "Transport": { "Airport": "Cochin Airport", "RailwayStation": "Aluva Station" }, "Accommodation": "Resorts", "Food": "Kerala Cuisine", "NotToMiss": "Tea Plantations" },
+    { "Place": "Alleppey", "Address": { "State": "Kerala", "ID": 2 }, "TouristAttractions": ["Backwaters", "Houseboats"], "BestTime": "September to March", "Transport": { "Airport": "Cochin Airport", "RailwayStation": "Alleppey Station" }, "Accommodation": "Houseboats", "Food": "Seafood", "NotToMiss": "Backwater Cruise" },
+    { "Place": "Wayanad", "Address": { "State": "Kerala", "ID": 3 }, "TouristAttractions": ["Edakkal Caves", "Chembra Peak"], "BestTime": "October to May", "Transport": { "Airport": "Calicut Airport", "RailwayStation": "Calicut Station" }, "Accommodation": "Homestays", "Food": "Malabar Cuisine", "NotToMiss": "Edakkal Caves" },
+    { "Place": "Kumarakom", "Address": { "State": "Kerala", "ID": 4 }, "TouristAttractions": ["Bird Sanctuary", "Backwaters"], "BestTime": "September to February", "Transport": { "Airport": "Cochin Airport", "RailwayStation": "Kottayam Station" }, "Accommodation": "Houseboats", "Food": "Kerala Cuisine", "NotToMiss": "Bird Watching" },
+    { "Place": "Kovalam", "Address": { "State": "Kerala", "ID": 5 }, "TouristAttractions": ["Lighthouse Beach", "Hawa Beach"], "BestTime": "October to March", "Transport": { "Airport": "Trivandrum Airport", "RailwayStation": "Trivandrum Station" }, "Accommodation": "Hotels", "Food": "Seafood", "NotToMiss": "Beach Walks" },
+    { "Place": "Mysore", "Address": { "State": "Karnataka", "ID": 6 }, "TouristAttractions": ["Mysore Palace", "Chamundi Hills"], "BestTime": "October to February", "Transport": { "Airport": "Mysore Airport", "RailwayStation": "Mysore Junction" }, "Accommodation": "Hotels", "Food": "Mysore Pak", "NotToMiss": "Dasara Festival" },
+    { "Place": "Coorg", "Address": { "State": "Karnataka", "ID": 7 }, "TouristAttractions": ["Abbey Falls", "Raja's Seat"], "BestTime": "October to March", "Transport": { "Airport": "Mangalore Airport", "RailwayStation": "Mysore Junction" }, "Accommodation": "Resorts", "Food": "Coffee", "NotToMiss": "Coffee Plantations" },
+    { "Place": "Hampi", "Address": { "State": "Karnataka", "ID": 8 }, "TouristAttractions": ["Virupaksha Temple", "Vittala Temple"], "BestTime": "October to March", "Transport": { "Airport": "Hubli Airport", "RailwayStation": "Hospet Junction" }, "Accommodation": "Guesthouses", "Food": "Karnataka Thali", "NotToMiss": "Ruins of Hampi" },
+    { "Place": "Chikmagalur", "Address": { "State": "Karnataka", "ID": 9 }, "TouristAttractions": ["Mullayanagiri", "Baba Budangiri"], "BestTime": "September to March", "Transport": { "Airport": "Mangalore Airport", "RailwayStation": "Kadur Junction" }, "Accommodation": "Hotels", "Food": "Local Cuisine", "NotToMiss": "Coffee Trails" },
+    { "Place": "Udupi", "Address": { "State": "Karnataka", "ID": 10 }, "TouristAttractions": ["Krishna Temple", "Malpe Beach"], "BestTime": "October to February", "Transport": { "Airport": "Mangalore Airport", "RailwayStation": "Udupi Station" }, "Accommodation": "Hotels", "Food": "Udupi Cuisine", "NotToMiss": "Malpe Beach Sunset" }
+]);
+
+db.TouristPlaces.find(
+    { "Address.State": "Kerala" },
+    { TouristAttractions: 1, _id: 0 }
+);
+
+db.TouristPlaces.find().sort({ "Address.State": 1 });
