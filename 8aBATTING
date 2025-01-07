@@ -1,0 +1,81 @@
+CREATE TABLE PLAYER (
+    PId INT PRIMARY KEY,
+    Lname VARCHAR(50),
+    Fname VARCHAR(50),
+    Country VARCHAR(50),
+    Yborn INT,
+    Bplace VARCHAR(50)
+);
+
+CREATE TABLE MATCH (
+    MatchId INT PRIMARY KEY,
+    Team1 VARCHAR(50),
+    Team2 VARCHAR(50),
+    Ground VARCHAR(100),
+    Date DATE,
+    Winner VARCHAR(50)
+);
+
+CREATE TABLE BATTING (
+    MatchId INT,
+    PId INT,
+    Nruns INT,
+    Fours INT,
+    Sixes INT,
+    PRIMARY KEY (MatchId, PId),
+    FOREIGN KEY (MatchId) REFERENCES MATCH(MatchId) ON DELETE CASCADE,
+    FOREIGN KEY (PId) REFERENCES PLAYER(PId) ON DELETE CASCADE
+);
+
+CREATE TABLE BOWLING (
+    MatchId INT,
+    PId INT,
+    Novers DECIMAL(4, 2),
+    Maidens INT,
+    Nruns INT,
+    Nwickets INT,
+    PRIMARY KEY (MatchId, PId),
+    FOREIGN KEY (MatchId) REFERENCES MATCH(MatchId) ON DELETE CASCADE,
+    FOREIGN KEY (PId) REFERENCES PLAYER(PId) ON DELETE CASCADE
+);
+
+INSERT INTO PLAYER VALUES 
+(1, 'Dhoni', 'MS', 'India', 1981, 'Ranchi'),
+(2, 'Smith', 'Steve', 'Australia', 1989, 'Kogarah'),
+(3, 'Kohli', 'Virat', 'India', 1988, 'Delhi'),
+(4, 'Warner', 'David', 'Australia', 1987, 'Paddington'),
+(5, 'Root', 'Joe', 'England', 1990, 'Sheffield');
+
+INSERT INTO MATCH VALUES 
+(2689, 'Australia', 'India', 'MCG', '2023-12-10', 'Australia'),
+(2690, 'India', 'England', 'Wankhede', '2023-12-12', 'India'),
+(2691, 'Australia', 'England', 'Old Trafford', '2023-12-15', 'Australia'),
+(2692, 'India', 'Australia', 'Eden Gardens', '2023-12-20', 'India'),
+(2693, 'England', 'Australia', 'Lords', '2023-12-25', 'England');
+
+INSERT INTO BATTING VALUES 
+(2689, 1, 50, 5, 2),
+(2689, 2, 30, 4, 1),
+(2690, 3, 60, 8, 3),
+(2691, 4, 45, 4, 2),
+(2693, 5, 75, 7, 5);
+
+INSERT INTO BOWLING VALUES 
+(2689, 1, 10.2, 1, 45, 2),
+(2690, 3, 9.4, 2, 35, 1),
+(2691, 4, 8.5, 1, 40, 3),
+(2692, 5, 10.0, 2, 38, 4),
+(2693, 2, 10.3, 1, 50, 1);
+
+SELECT DISTINCT Ground 
+FROM MATCH 
+WHERE Team1 = 'Australia' 
+ORDER BY Ground;
+
+SELECT * 
+FROM MATCH 
+WHERE MatchId IN (SELECT MatchId FROM BATTING WHERE PId = 1);
+
+SELECT P.Lname, P.Fname 
+FROM PLAYER P, BATTING B 
+WHERE P.PId = B.PId AND B.MatchId = 2689;
