@@ -1,0 +1,86 @@
+CREATE TABLE PERSON (
+    driver_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    address VARCHAR(100)
+);
+
+CREATE TABLE CAR (
+    Regno VARCHAR(20) PRIMARY KEY,
+    model VARCHAR(50),
+    year INT
+);
+
+CREATE TABLE ACCIDENT (
+    report_number INT PRIMARY KEY,
+    acc_date DATE,
+    location VARCHAR(100)
+);
+
+CREATE TABLE OWNS (
+    driver_id INT,
+    Regno VARCHAR(20),
+    PRIMARY KEY (driver_id, Regno),
+    FOREIGN KEY (driver_id) REFERENCES PERSON(driver_id) ON DELETE CASCADE,
+    FOREIGN KEY (Regno) REFERENCES CAR(Regno) ON DELETE CASCADE
+);
+
+CREATE TABLE PARTICIPATED (
+    driver_id INT,
+    Regno VARCHAR(20),
+    report_number INT,
+    damage_amount DECIMAL(10, 2),
+    PRIMARY KEY (driver_id, Regno, report_number),
+    FOREIGN KEY (driver_id) REFERENCES PERSON(driver_id) ON DELETE CASCADE,
+    FOREIGN KEY (Regno) REFERENCES CAR(Regno) ON DELETE CASCADE,
+    FOREIGN KEY (report_number) REFERENCES ACCIDENT(report_number) ON DELETE CASCADE
+);
+
+INSERT INTO PERSON VALUES 
+(1, 'John Doe', '123 Elm St'),
+(2, 'Jane Smith', '456 Oak St'),
+(3, 'Alice Brown', '789 Pine St'),
+(4, 'Mike Johnson', '321 Maple St'),
+(5, 'Emma Davis', '654 Birch St');
+
+INSERT INTO CAR VALUES 
+('KA01AB1234', 'Toyota Corolla', 2019),
+('KA02CD5678', 'Honda Civic', 2020),
+('KA03EF9012', 'Ford Focus', 2018),
+('KA04GH3456', 'Hyundai Elantra', 2021),
+('KA05IJ7890', 'Nissan Altima', 2017);
+
+INSERT INTO ACCIDENT VALUES 
+(101, '2024-01-01', 'Main Street'),
+(102, '2024-02-15', 'Highway 66'),
+(103, '2024-03-10', 'Downtown'),
+(104, '2024-04-20', 'Beach Road'),
+(105, '2024-05-05', 'Hilltop Avenue');
+
+INSERT INTO OWNS VALUES 
+(1, 'KA01AB1234'),
+(2, 'KA02CD5678'),
+(3, 'KA03EF9012'),
+(4, 'KA04GH3456'),
+(5, 'KA05IJ7890');
+
+INSERT INTO PARTICIPATED VALUES 
+(1, 'KA01AB1234', 101, 5000),
+(2, 'KA02CD5678', 102, 7000),
+(3, 'KA03EF9012', 103, 3000),
+(4, 'KA04GH3456', 104, 9000),
+(5, 'KA05IJ7890', 105, 10000);
+
+SELECT DISTINCT Regno FROM PARTICIPATED;
+
+SELECT Regno, model 
+FROM CAR 
+WHERE Regno = (
+    SELECT Regno 
+    FROM PARTICIPATED 
+    ORDER BY damage_amount DESC 
+    LIMIT 1
+);
+
+SELECT driver_id, COUNT(Regno) AS num_cars 
+FROM OWNS 
+GROUP BY driver_id;
