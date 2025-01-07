@@ -1,0 +1,16 @@
+db.Movies.insertMany([
+    { "Actor_name": "John", "Actor_id": 1, "Actor_birthdate": "1985-06-15", "Director_name": "Ram", "Director_id": 101, "Director_birthdate": "1975-04-20", "Film_title": "Thriller Nights", "Year_of_production": 2012, "Type": "Thriller" },
+    { "Actor_name": "Elly", "Actor_id": 2, "Actor_birthdate": "1990-03-10", "Director_name": "Raj", "Director_id": 102, "Director_birthdate": "1980-08-30", "Film_title": "Comedy Waves", "Year_of_production": 2012, "Type": "Comedy" },
+    { "Actor_name": "John", "Actor_id": 1, "Actor_birthdate": "1985-06-15", "Director_name": "Sita", "Director_id": 103, "Director_birthdate": "1982-09-25", "Film_title": "Action Legends", "Year_of_production": 2013, "Type": "Action" },
+    { "Actor_name": "Elly", "Actor_id": 2, "Actor_birthdate": "1990-03-10", "Director_name": "Raj", "Director_id": 102, "Director_birthdate": "1980-08-30", "Film_title": "Drama Hearts", "Year_of_production": 2014, "Type": "Drama" },
+    { "Actor_name": "John", "Actor_id": 1, "Actor_birthdate": "1985-06-15", "Director_name": "Ram", "Director_id": 101, "Director_birthdate": "1975-04-20", "Film_title": "Thriller Moments", "Year_of_production": 2012, "Type": "Thriller" },
+    { "Actor_name": "Ram", "Actor_id": 3, "Actor_birthdate": "1978-02-25", "Director_name": "Raj", "Director_id": 102, "Director_birthdate": "1980-08-30", "Film_title": "Mystery Solvers", "Year_of_production": 2012, "Type": "Mystery" },
+    { "Actor_name": "John", "Actor_id": 1, "Actor_birthdate": "1985-06-15", "Director_name": "Sita", "Director_id": 103, "Director_birthdate": "1982-09-25", "Film_title": "Comedy Showdown", "Year_of_production": 2012, "Type": "Comedy" },
+    { "Actor_name": "Elly", "Actor_id": 2, "Actor_birthdate": "1990-03-10", "Director_name": "Ram", "Director_id": 101, "Director_birthdate": "1975-04-20", "Film_title": "Romantic Bliss", "Year_of_production": 2015, "Type": "Romance" },
+    { "Actor_name": "Ram", "Actor_id": 3, "Actor_birthdate": "1978-02-25", "Director_name": "Sita", "Director_id": 103, "Director_birthdate": "1982-09-25", "Film_title": "Action Fury", "Year_of_production": 2016, "Type": "Action" },
+    { "Actor_name": "John", "Actor_id": 1, "Actor_birthdate": "1985-06-15", "Director_name": "Ram", "Director_id": 101, "Director_birthdate": "1975-04-20", "Film_title": "Comedy Clash", "Year_of_production": 2012, "Type": "Comedy" }
+]);
+
+db.Movies.find({ "Actor_name": { $in: ["John", "Elly"] }, "Year_of_production": 2012 });
+
+db.Movies.find({ "Actor_name": "Ram" }, { "Film_title": 1, "Type": 1, "_id": 0 }).sort({ "Film_title": 1 });
