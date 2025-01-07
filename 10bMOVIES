@@ -1,0 +1,20 @@
+db.movies.insertMany([
+    { Actor_name: 'John', Actor_id: 1, Actor_birthdate: '1980-01-01', Director_name: 'Ram', Director_id: 1, Director_birthdate: '1975-05-15', film_title: 'Movie A', year_of_production: 2012, type: 'Comedy' },
+    { Actor_name: 'Elly', Actor_id: 2, Actor_birthdate: '1985-03-10', Director_name: 'Ram', Director_id: 1, Director_birthdate: '1975-05-15', film_title: 'Movie B', year_of_production: 2012, type: 'Thriller' },
+    { Actor_name: 'John', Actor_id: 1, Actor_birthdate: '1980-01-01', Director_name: 'Sita', Director_id: 2, Director_birthdate: '1980-07-25', film_title: 'Movie C', year_of_production: 2013, type: 'Action' },
+    { Actor_name: 'Chris', Actor_id: 3, Actor_birthdate: '1990-02-20', Director_name: 'Raj', Director_id: 3, Director_birthdate: '1983-04-09', film_title: 'Movie D', year_of_production: 2014, type: 'Romantic' },
+    { Actor_name: 'Ram', Actor_id: 4, Actor_birthdate: '1995-11-12', Director_name: 'Raj', Director_id: 3, Director_birthdate: '1983-04-09', film_title: 'Movie E', year_of_production: 2012, type: 'Drama' },
+    { Actor_name: 'John', Actor_id: 1, Actor_birthdate: '1980-01-01', Director_name: 'Raj', Director_id: 3, Director_birthdate: '1983-04-09', film_title: 'Movie F', year_of_production: 2015, type: 'Thriller' },
+    { Actor_name: 'Amit', Actor_id: 5, Actor_birthdate: '1988-06-15', Director_name: 'Sita', Director_id: 2, Director_birthdate: '1980-07-25', film_title: 'Movie G', year_of_production: 2016, type: 'Comedy' },
+    { Actor_name: 'Nina', Actor_id: 6, Actor_birthdate: '1992-09-22', Director_name: 'Sita', Director_id: 2, Director_birthdate: '1980-07-25', film_title: 'Movie H', year_of_production: 2017, type: 'Sci-Fi' },
+    { Actor_name: 'John', Actor_id: 1, Actor_birthdate: '1980-01-01', Director_name: 'Ram', Director_id: 1, Director_birthdate: '1975-05-15', film_title: 'Movie I', year_of_production: 2012, type: 'Drama' },
+    { Actor_name: 'Elly', Actor_id: 2, Actor_birthdate: '1985-03-10', Director_name: 'Ram', Director_id: 1, Director_birthdate: '1975-05-15', film_title: 'Movie J', year_of_production: 2016, type: 'Action' }
+]);
+
+db.movies.find({ Actor_name: { $in: ['John', 'Elly'] }, year_of_production: 2012 });
+
+db.movies.aggregate([
+    { $match: { Actor_name: 'Ram' } },
+    { $project: { film_title: 1, type: 1 } },
+    { $sort: { film_title: 1 } }
+]);
