@@ -1,0 +1,102 @@
+db.restaurants.insertMany([
+    {
+        name: "Olive Garden",
+        address: { building: "12", street: "MG Road", area: "Bangalore", pincode: 560001 },
+        id: 1,
+        cuisine: "Italian",
+        nearbylandmarks: "Brigade Road",
+        onlineDelivery: "yes",
+        famousFor: "Pasta"
+    },
+    {
+        name: "La Pinoz",
+        address: { building: "101", street: "Church Street", area: "Bangalore", pincode: 560001 },
+        id: 2,
+        cuisine: "Italian",
+        nearbylandmarks: "Cubbon Park",
+        onlineDelivery: "no",
+        famousFor: "Pizza"
+    },
+    {
+        name: "Thali Palace",
+        address: { building: "45", street: "Residency Road", area: "Bangalore", pincode: 560025 },
+        id: 3,
+        cuisine: "North Indian Thali",
+        nearbylandmarks: "UB City",
+        onlineDelivery: "yes",
+        famousFor: "Thali"
+    },
+    {
+        name: "Biryani Junction",
+        address: { building: "67", street: "Koramangala", area: "Bangalore", pincode: 560034 },
+        id: 4,
+        cuisine: "Hyderabadi Biryani",
+        nearbylandmarks: "Forum Mall",
+        onlineDelivery: "no",
+        famousFor: "Biryani"
+    },
+    {
+        name: "Spicy Bite",
+        address: { building: "33", street: "HSR Layout", area: "Bangalore", pincode: 560102 },
+        id: 5,
+        cuisine: "North Indian Thali",
+        nearbylandmarks: "HSR Club",
+        onlineDelivery: "yes",
+        famousFor: "Rajma Chawal"
+    },
+    {
+        name: "Italian Delight",
+        address: { building: "21", street: "Whitefield", area: "Bangalore", pincode: 560066 },
+        id: 6,
+        cuisine: "Italian",
+        nearbylandmarks: "ITPL",
+        onlineDelivery: "yes",
+        famousFor: "Risotto"
+    },
+    {
+        name: "Mughal Treat",
+        address: { building: "7", street: "Indiranagar", area: "Bangalore", pincode: 560038 },
+        id: 7,
+        cuisine: "Mughlai",
+        nearbylandmarks: "100 Feet Road",
+        onlineDelivery: "no",
+        famousFor: "Kebabs"
+    },
+    {
+        name: "South Spice",
+        address: { building: "9", street: "Banashankari", area: "Bangalore", pincode: 560070 },
+        id: 8,
+        cuisine: "South Indian",
+        nearbylandmarks: "Big Bazaar",
+        onlineDelivery: "yes",
+        famousFor: "Dosa"
+    },
+    {
+        name: "Punjabi Junction",
+        address: { building: "11", street: "JP Nagar", area: "Bangalore", pincode: 560078 },
+        id: 9,
+        cuisine: "North Indian Thali",
+        nearbylandmarks: "Central Mall",
+        onlineDelivery: "no",
+        famousFor: "Paneer Tikka"
+    },
+    {
+        name: "Cafe Italiano",
+        address: { building: "19", street: "Yelahanka", area: "Bangalore", pincode: 560064 },
+        id: 10,
+        cuisine: "Italian",
+        nearbylandmarks: "RMZ Galleria",
+        onlineDelivery: "yes",
+        famousFor: "Lasagna"
+    }
+]);
+
+db.restaurants.find(
+    { "address.area": "Bangalore", cuisine: "Italian" },
+    { name: 1, address: 1, _id: 0 }
+);
+
+db.restaurants.find(
+    { "address.area": "Bangalore", cuisine: "North Indian Thali" },
+    { name: 1, address: 1, nearbylandmarks: 1, _id: 0 }
+);
