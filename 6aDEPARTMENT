@@ -1,0 +1,63 @@
+CREATE TABLE DEPARTMENT (
+    Dname VARCHAR(50),
+    Dnumber INT PRIMARY KEY,
+    MgrSSN CHAR(9),
+    MgrStartDate DATE
+);
+
+CREATE TABLE EMPLOYEE (
+    Fname VARCHAR(50),
+    Lname VARCHAR(50),
+    SSN CHAR(9) PRIMARY KEY,
+    Addrs VARCHAR(100),
+    Sex CHAR(1),
+    Salary DECIMAL(10, 2),
+    SuperSSN CHAR(9),
+    Dno INT,
+    FOREIGN KEY (SuperSSN) REFERENCES EMPLOYEE(SSN) ON DELETE SET NULL,
+    FOREIGN KEY (Dno) REFERENCES DEPARTMENT(Dnumber) ON DELETE CASCADE
+);
+
+CREATE TABLE DEPENDENT (
+    Dname VARCHAR(50),
+    ESSN CHAR(9),
+    FOREIGN KEY (ESSN) REFERENCES EMPLOYEE(SSN) ON DELETE CASCADE
+);
+
+INSERT INTO DEPARTMENT VALUES 
+('Tech Department', 1, '123456789', '2020-01-01'),
+('HR Department', 2, '987654321', '2021-03-15'),
+('Finance Department', 3, '456789123', '2019-07-10'),
+('Marketing Department', 4, '321654987', '2022-05-20'),
+('IT Department', 5, '654987321', '2021-12-01');
+
+INSERT INTO EMPLOYEE VALUES 
+('John', 'Doe', '123456789', '123 Elm St', 'M', 60000, NULL, 1),
+('Jane', 'Smith', '987654321', '456 Oak St', 'F', 65000, '123456789', 2),
+('Alice', 'Brown', '456789123', '789 Pine St', 'F', 70000, '123456789', 3),
+('Mike', 'Johnson', '321654987', '321 Maple St', 'M', 75000, '987654321', 4),
+('Emma', 'Davis', '654987321', '654 Birch St', 'F', 72000, '987654321', 5);
+
+INSERT INTO DEPENDENT VALUES 
+('Spouse', '123456789'),
+('Child', '123456789'),
+('Spouse', '987654321'),
+('Child', '456789123'),
+('Parent', '321654987');
+
+SELECT Dname, AVG(Salary) AS AverageSalary
+FROM EMPLOYEE E
+JOIN DEPARTMENT D ON E.Dno = D.Dnumber
+GROUP BY Dname;
+
+SELECT DISTINCT E.Fname, E.Lname
+FROM EMPLOYEE E
+JOIN DEPARTMENT D ON E.SSN = D.MgrSSN
+WHERE E.SSN IN (
+    SELECT ESSN 
+    FROM DEPENDENT
+);
+
+SELECT *
+FROM DEPARTMENT
+WHERE Dname LIKE '%tech%';
