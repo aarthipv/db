@@ -1,0 +1,48 @@
+CREATE TABLE SUPPLIER (
+    Sid INT PRIMARY KEY,
+    Sname VARCHAR(50),
+    Address VARCHAR(100)
+);
+
+CREATE TABLE PART (
+    PID INT PRIMARY KEY,
+    Pname VARCHAR(50),
+    Color VARCHAR(20)
+);
+
+CREATE TABLE SHIPMENT (
+    Sid INT,
+    PID INT,
+    Cost DECIMAL(10, 2),
+    PRIMARY KEY (Sid, PID),
+    FOREIGN KEY (Sid) REFERENCES SUPPLIER(Sid),
+    FOREIGN KEY (PID) REFERENCES PART(PID)
+);
+
+INSERT INTO SUPPLIER VALUES
+(1, 'Alice', 'New York'),
+(2, 'Bob', 'Los Angeles'),
+(3, 'Charlie', 'Chicago'),
+(4, 'David', 'Houston'),
+(5, 'Eve', 'Phoenix');
+
+INSERT INTO PART VALUES
+(101, 'Bolt', 'Red'),
+(102, 'Nut', 'Green'),
+(103, 'Screw', 'Blue'),
+(104, 'Washer', 'Green'),
+(105, 'Bracket', 'Black');
+
+INSERT INTO SHIPMENT VALUES
+(1, 101, 5.00),
+(1, 102, 3.50),
+(2, 103, 7.00),
+(3, 104, 2.50),
+(4, 105, 6.00),
+(3, 102, 4.00);
+
+SELECT DISTINCT Sid FROM SHIPMENT JOIN PART ON SHIPMENT.PID = PART.PID WHERE Color = 'Green';
+
+SELECT SUPPLIER.Sname, COUNT(SHIPMENT.PID) AS TotalParts FROM SUPPLIER LEFT JOIN SHIPMENT ON SUPPLIER.Sid = SHIPMENT.Sid GROUP BY SUPPLIER.Sname;
+
+UPDATE PART SET Color = 'Yellow' WHERE PID IN (SELECT PID FROM SHIPMENT WHERE Sid = 3);
