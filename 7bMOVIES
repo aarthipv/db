@@ -1,0 +1,16 @@
+db.Movies.insertMany([
+    { "Actor_name": "John", "Actor_id": 1, "Actor_birthdate": "1990-01-15", "Director_name": "Ram", "Director_id": 101, "Director_birthdate": "1975-06-10", "Film_title": "Thriller Hunt", "Year_of_production": 2018, "Type": "Thriller" },
+    { "Actor_name": "John", "Actor_id": 1, "Actor_birthdate": "1990-01-15", "Director_name": "Raj", "Director_id": 102, "Director_birthdate": "1980-08-22", "Film_title": "Comedy King", "Year_of_production": 2018, "Type": "Comedy" },
+    { "Actor_name": "Sam", "Actor_id": 2, "Actor_birthdate": "1985-03-10", "Director_name": "Ram", "Director_id": 101, "Director_birthdate": "1975-06-10", "Film_title": "Mystery Tales", "Year_of_production": 2017, "Type": "Mystery" },
+    { "Actor_name": "Emily", "Actor_id": 3, "Actor_birthdate": "1992-12-25", "Director_name": "Sita", "Director_id": 103, "Director_birthdate": "1982-09-15", "Film_title": "Romantic Saga", "Year_of_production": 2018, "Type": "Romance" },
+    { "Actor_name": "John", "Actor_id": 1, "Actor_birthdate": "1990-01-15", "Director_name": "Ram", "Director_id": 101, "Director_birthdate": "1975-06-10", "Film_title": "Action Blast", "Year_of_production": 2019, "Type": "Action" },
+    { "Actor_name": "Alice", "Actor_id": 4, "Actor_birthdate": "1995-11-20", "Director_name": "Raj", "Director_id": 102, "Director_birthdate": "1980-08-22", "Film_title": "Comedy Nights", "Year_of_production": 2020, "Type": "Comedy" },
+    { "Actor_name": "Chris", "Actor_id": 5, "Actor_birthdate": "1987-07-14", "Director_name": "Ram", "Director_id": 101, "Director_birthdate": "1975-06-10", "Film_title": "Thrilling Times", "Year_of_production": 2016, "Type": "Thriller" },
+    { "Actor_name": "John", "Actor_id": 1, "Actor_birthdate": "1990-01-15", "Director_name": "Sita", "Director_id": 103, "Director_birthdate": "1982-09-15", "Film_title": "Dramatic Events", "Year_of_production": 2018, "Type": "Drama" },
+    { "Actor_name": "Sophia", "Actor_id": 6, "Actor_birthdate": "1991-04-10", "Director_name": "Ram", "Director_id": 101, "Director_birthdate": "1975-06-10", "Film_title": "Epic Adventure", "Year_of_production": 2019, "Type": "Adventure" },
+    { "Actor_name": "John", "Actor_id": 1, "Actor_birthdate": "1990-01-15", "Director_name": "Ram", "Director_id": 101, "Director_birthdate": "1975-06-10", "Film_title": "Comedy Show", "Year_of_production": 2018, "Type": "Comedy" }
+]);
+
+db.Movies.find({ "Actor_name": "John", "Year_of_production": 2018 });
+
+db.Movies.find({ "Director_name": "Ram" }, { "Actor_name": 1, "Type": 1, "_id": 0 });
