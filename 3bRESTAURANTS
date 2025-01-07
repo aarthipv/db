@@ -1,0 +1,19 @@
+// Creating the collection and inserting 10 documents
+db.restaurants.insertMany([
+  { Name: "Shree Thali", Address: { Building: "123", Street: "MG Road", Area: "Central", PinCode: "560001" }, ID: 1, Cuisine: "North Indian Thali", Nearby: ["Cubbon Park", "Vidhana Soudha"], OnlineDelivery: "yes", FamousFor: "Paneer Butter Masala" },
+  { Name: "The Royal Thali", Address: { Building: "456", Street: "Church Street", Area: "Central", PinCode: "560002" }, ID: 2, Cuisine: "North Indian Thali", Nearby: ["Koshy’s", "M.G Road"], OnlineDelivery: "no", FamousFor: "Dal Makhani" },
+  { Name: "Bangalore Biryani", Address: { Building: "789", Street: "Bangalore Palace Road", Area: "Vasanth Nagar", PinCode: "560005" }, ID: 3, Cuisine: "South Indian", Nearby: ["Bangalore Palace", "Cubbon Park"], OnlineDelivery: "yes", FamousFor: "Hyderabadi Biryani" },
+  { Name: "Tandoor Town", Address: { Building: "321", Street: "Indiranagar", Area: "East", PinCode: "560038" }, ID: 4, Cuisine: "North Indian Thali", Nearby: ["Indiranagar Metro", "Café Thulp"], OnlineDelivery: "yes", FamousFor: "Butter Chicken" },
+  { Name: "Curry Leaf", Address: { Building: "654", Street: "Koramangala", Area: "South", PinCode: "560034" }, ID: 5, Cuisine: "North Indian Thali", Nearby: ["Forum Mall", "Koramangala 5th Block"], OnlineDelivery: "no", FamousFor: "Aloo Gobi" },
+  { Name: "Veg Thali Corner", Address: { Building: "123", Street: "Bannerghatta Road", Area: "South", PinCode: "560029" }, ID: 6, Cuisine: "North Indian Thali", Nearby: ["Jayadeva Hospital", "Bannerghatta National Park"], OnlineDelivery: "yes", FamousFor: "Gobi Manchurian" },
+  { Name: "Royal North Thali", Address: { Building: "987", Street: "Jayanagar", Area: "South", PinCode: "560041" }, ID: 7, Cuisine: "North Indian Thali", Nearby: ["Jayanagar Shopping Complex", "Ragigudda Temple"], OnlineDelivery: "yes", FamousFor: "Paneer Tikka" },
+  { Name: "The Spice Hut", Address: { Building: "234", Street: "Vasanth Nagar", Area: "Central", PinCode: "560014" }, ID: 8, Cuisine: "South Indian", Nearby: ["UB City", "Vasanth Nagar"], OnlineDelivery: "no", FamousFor: "Dosa" },
+  { Name: "Biryani Shack", Address: { Building: "345", Street: "Jeevan Bhima Nagar", Area: "East", PinCode: "560075" }, ID: 9, Cuisine: "North Indian Thali", Nearby: ["Eden Park", "KR Puram"], OnlineDelivery: "yes", FamousFor: "Vegetable Biryani" },
+  { Name: "Nawab's Feast", Address: { Building: "876", Street: "Kammanahalli", Area: "North", PinCode: "560084" }, ID: 10, Cuisine: "North Indian Thali", Nearby: ["Kammanahalli Lake", "Byappanahalli"], OnlineDelivery: "yes", FamousFor: "Mutton Korma" }
+]);
+
+// Query 1: List the name, address, and nearby landmarks of all restaurants in Bangalore where North Indian Thali is available
+db.restaurants.find({ Cuisine: "North Indian Thali" }, { Name: 1, Address: 1, Nearby: 1 });
+
+// Query 2: List the name and address of restaurants and also the dish the restaurant is famous for, in Bangalore where online delivery is available
+db.restaurants.find({ OnlineDelivery: "yes" }, { Name: 1, Address: 1, FamousFor: 1 });
